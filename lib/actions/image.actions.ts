@@ -8,6 +8,8 @@ import Image from "../database/models/image.model";
 import { redirect } from "next/navigation";
 
 import { v2 as cloudinary } from "cloudinary";
+import { updateCredits } from "./user.actions";
+import { creditFee } from "@/constants";
 
 const populateUser = (query: any) => query.populate({
     path: 'author',
@@ -55,6 +57,8 @@ export async function updateImage({ image, userId, path }: UpdateImageParams) {
             image,
             {new: true}
         )
+
+        // updateCredits(userId, creditFee)
 
         revalidatePath(path)
 
